@@ -4,25 +4,33 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class User {
-    private String username;
-    private String password;
+
+    String id;
+    String email;
+    String username;
+    String password;
     int dinero = 20;
+
     List<Products> productos;
 
-    public User(String username, String password) {
+
+    public User(String email, String username, String password) {
+        this();
+        this.email = email;
         this.username = username;
         this.password = password;
         this.productos = new LinkedList<>();
-
+    }
+    public User() {
     }
 
-    public User(String username, int dinero) {
-        this.username = username;
-        this.dinero = dinero;
-        this.productos = new LinkedList<>();
+    private void setId(String id) {
+        this.id=id;
     }
 
-    // Getters and setters
+    public String getId(){
+        return id;
+    }
     public String getUsername() {
         return username;
     }
@@ -39,12 +47,43 @@ public class User {
         this.password = password;
     }
 
-    public int getDinero() {
-        return dinero;
+    public List<Products> getProductos(){return productos; }
+    public void addProducto(Products p){
+        productos.add(p);
+        dinero = dinero - p.getPrice();
     }
 
-    public void setDinero(int dinero) {
+    public int getDinero(){
+        return this.dinero;
+    }
+    public String getEmail(){
+        return email;
+    }
+    public void setDinero(int dinero){
         this.dinero = dinero;
     }
 
+
+    public void setProductos(List<Products> productos){this.productos = productos; }
+
+    public User setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public void setUser(User user){
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.dinero = user.getDinero();
+        this.productos = user.getProductos();
+    }
+//
+//    public User(String username, int dinero) {
+//        this.username = username;
+//        this.dinero = dinero;
+//        this.productos = new LinkedList<>();
+//    }
+//
 }

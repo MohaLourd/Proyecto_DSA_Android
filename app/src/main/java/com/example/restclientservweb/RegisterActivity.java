@@ -25,8 +25,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        EditText editTextEmail = findViewById(R.id.editTextEmail);
         EditText editTextUsername = findViewById(R.id.editTextUsername);
         EditText editTextPassword = findViewById(R.id.editTextPassword);
+        EditText editTextPassword2 = findViewById(R.id.editTextPassword2);
         Button buttonRegister = findViewById(R.id.buttonRegister);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -37,9 +39,17 @@ public class RegisterActivity extends AppCompatActivity {
         apiService = retrofit.create(ApiService.class);
 
         buttonRegister.setOnClickListener(v -> {
+            String email = editTextEmail.getText().toString();
             String username = editTextUsername.getText().toString();
             String password = editTextPassword.getText().toString();
-            registerUser(username, password);
+            String password2 = editTextPassword2.getText().toString();
+            if(password.equals(password2)) {
+                registerUser(email, username, password);
+            }
+            else{
+                Toast.makeText(RegisterActivity.this,
+                        "Passwords are different", Toast.LENGTH_SHORT).show();
+            }
         });
 
         Button buttonBackToMain = findViewById(R.id.buttonBackToMain);
@@ -49,17 +59,19 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void registerUser(String username, String password) {
-        User user = new User(username, password);
+    private void registerUser(String email, String username, String password) {
+        User user = new User(email, username, password);
         Call<User> call = apiService.registerUser(user);
 
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
+                    user.setUser(response.body());
                     Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegisterActivity.this, StoreActivity.class);
-                    intent.putExtra("username", username);
+                    intent.putExtra("username", user.getUsername());
+                    intent.putExtra("idUser", user.getId());
                     startActivity(intent);
                 } else {
                     Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();

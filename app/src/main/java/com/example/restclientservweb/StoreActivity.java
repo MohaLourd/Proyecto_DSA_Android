@@ -2,6 +2,7 @@ package com.example.restclientservweb;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +26,7 @@ public class StoreActivity extends AppCompatActivity {
     private TextView usernameDisplay;
     private TextView dineroDisplay;
     private String username;
+    private String idUser;
     private int dinero;
 
     @Override
@@ -44,9 +46,8 @@ public class StoreActivity extends AppCompatActivity {
 
         apiService = retrofit.create(ApiService.class);
 
-        getProducts();
-
         username = getIntent().getStringExtra("username");
+        idUser = getIntent().getStringExtra("idUser");
         if (username != null) {
             usernameDisplay.setText("Usuario: " + username);
             getDinero();
@@ -62,9 +63,10 @@ public class StoreActivity extends AppCompatActivity {
             Intent intent = new Intent(StoreActivity.this, MainActivity.class);
             startActivity(intent);
         });
+        getProducts();
 
         // Inicializar el adaptador para la lista de productos comprados
-        ProductAdapter purchasedAdapter = new ProductAdapter(this, new ArrayList<>(), username, true, dinero);
+        ProductAdapter purchasedAdapter = new ProductAdapter(this, new ArrayList<>(), username, true, this.dinero, idUser);
         listViewComprados.setAdapter(purchasedAdapter);
         listViewComprados.setVisibility(View.VISIBLE);
         findViewById(R.id.compradosHeader).setVisibility(View.VISIBLE);
@@ -82,7 +84,7 @@ public class StoreActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     List<Products> products = response.body();
                    // ArrayAdapter<Products> adapter = new ArrayAdapter<>(StoreActivity.this, android.R.layout.simple_list_item_1, products);
-                    ProductAdapter adapter = new ProductAdapter(StoreActivity.this, products, username, false, dinero);
+                    ProductAdapter adapter = new ProductAdapter(StoreActivity.this, products, username, false, dinero, idUser);
                     listViewProducts.setAdapter(adapter);
                 } else {
                     Toast.makeText(StoreActivity.this, "Failed to retrieve products", Toast.LENGTH_SHORT).show();
@@ -98,7 +100,7 @@ public class StoreActivity extends AppCompatActivity {
     }
 
     private void getDinero() {
-        Call<Integer> call = apiService.getDinero(username);
+        Call<Integer> call = apiService.getDinero(idUser);
 
         call.enqueue(new Callback<Integer>() {
             @Override
@@ -115,6 +117,7 @@ public class StoreActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
                 Toast.makeText(StoreActivity.this, "An error occurred", Toast.LENGTH_SHORT).show();
+                Log.d("CAT", "getDinero error: "+t.getMessage());
             }
         });
     }

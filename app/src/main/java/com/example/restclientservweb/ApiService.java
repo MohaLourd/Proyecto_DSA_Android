@@ -24,9 +24,9 @@ public interface ApiService {
     @GET("/dsaApp/objects/Android")
     Call<List<Products>> getProducts();
 
-   @GET("/dsaApp/users/{username}/dinero")
-    Call<Integer> getDinero(@Path("username") String username);
+   @GET("/dsaApp/users/{idUser}/dinero")
+    Call<Integer> getDinero(@Path("idUser") String idUser);
 
-    @POST("/dsaApp/users/{username}/products/{id}")
-    Call<Products> addProductToUser(@Path("username") String username, @Path("id") int id);
+    @POST("/dsaApp/users/{idUser}/products/{idProduct}")
+    Call<Products> addProductToUser(@Path("idUser") String idUser, @Path("idProduct") int idProduct);
 }

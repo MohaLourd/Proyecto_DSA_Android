@@ -7,17 +7,33 @@
     android:padding="16dp">
 
     <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="300dp"
+        android:layout_height="63dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="text" />
+
+    <EditText
         android:id="@+id/editTextUsername"
-        android:layout_width="381dp"
+        android:layout_width="300dp"
         android:layout_height="63dp"
         android:hint="Username" />
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="381dp"
-        android:layout_height="71dp"
+        android:layout_width="300dp"
+        android:layout_height="63dp"
         android:layout_marginTop="16dp"
         android:hint="Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/editTextPassword2"
+        android:layout_width="300dp"
+        android:layout_height="63dp"
+        android:ems="10"
+        android:hint="Repeat the Password"
         android:inputType="textPassword" />
 
     <Button

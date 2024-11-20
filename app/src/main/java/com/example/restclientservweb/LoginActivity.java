@@ -54,17 +54,20 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void loginUser(String username, String password) {
-        User user = new User(username, password);
-        Call<User> call = apiService.loginUser(user);
+    private void loginUser(String user, String password) {
+        User u = new User(user, user, password);
+        Call<User> call = apiService.loginUser(u);
 
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
+                    u.setUser(response.body());
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, StoreActivity.class);
-                    intent.putExtra("username", username);
+                    intent.putExtra("username", u.getUsername());
+                    intent.putExtra("idUser", u.getId());
+
                     startActivity(intent);
                 } else {
                     Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();

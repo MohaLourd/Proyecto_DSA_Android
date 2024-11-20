@@ -21,14 +21,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProductAdapter extends ArrayAdapter<Products> {
     private ApiService apiService;
     private String username;
+    private String idUser;
     private boolean isPurchasedList;
     private int dinero;
 
-    public ProductAdapter(Context context, List<Products> products, String username, boolean isPurchasedList, int dinero) {
+    public ProductAdapter(Context context, List<Products> products, String username, boolean isPurchasedList, int dinero, String idUser) {
         super(context, 0, products);
         this.username = username;
         this.isPurchasedList = isPurchasedList;
         this.dinero = dinero;
+        this.idUser = idUser;
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/dsaApp/")
@@ -65,7 +67,7 @@ public class ProductAdapter extends ArrayAdapter<Products> {
         return convertView;
     }
     private void addProductToUser(Products product) {
-        Call<Products> call = apiService.addProductToUser(username, product.getId());
+        Call<Products> call = apiService.addProductToUser(idUser, product.getId());
 
         call.enqueue(new Callback<Products>() {
             @Override
