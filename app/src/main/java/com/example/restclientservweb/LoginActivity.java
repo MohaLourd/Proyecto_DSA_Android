@@ -1,10 +1,15 @@
 package com.example.restclientservweb;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,18 +26,26 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
     private ApiService apiService;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private ProgressBar progressBar;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        sharedPreferences = getSharedPreferences("loginPreferences", Context.MODE_PRIVATE);
 
 
         EditText editTextUsername = findViewById(R.id.editTextUsername);
         EditText editTextPassword = findViewById(R.id.editTextPassword);
         Button buttonLogin = findViewById(R.id.buttonLogin);
+
+        // Inicializar vistas
+        progressBar = findViewById(R.id.progressBar);
+        textView = findViewById(R.id.textView);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/dsaApp/") // Cambiado a 10.0.2.2 para el emulador
@@ -42,6 +55,11 @@ public class LoginActivity extends AppCompatActivity {
         apiService = retrofit.create(ApiService.class);
 
         buttonLogin.setOnClickListener(v -> {
+            textView.setText("Cargando...");
+            progressBar.setVisibility(View.VISIBLE); // Mostrar el ProgressBar
+            textView.setVisibility(View.VISIBLE); // Mostrar el TextView
+
+
             String username = editTextUsername.getText().toString();
             String password = editTextPassword.getText().toString();
             loginUser(username, password);
@@ -62,6 +80,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE); // Ocultar el ProgressBar
+                    textView.setVisibility(View.GONE); // Ocultar el TextView
+                    saveLoginDetails(user);
+
+
                     u.setUser(response.body());
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, StoreActivity.class);
@@ -76,8 +99,17 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                progressBar.setVisibility(View.GONE); // Ocultar el ProgressBar
+                textView.setVisibility(View.GONE); // Ocultar el TextView
+
                 Toast.makeText(LoginActivity.this, "An error occurred", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void saveLoginDetails(String username) {
+        editor = sharedPreferences.edit();
+        editor.putString("username", username);
+        editor.apply();
     }
 }

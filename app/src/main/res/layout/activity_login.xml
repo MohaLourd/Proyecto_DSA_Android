@@ -34,5 +34,27 @@
         android:layout_height="wrap_content"
         android:text="BackToMain" />
 
+    <!-- Texto que indica el estado de la operación -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="CARGANDO"
+        android:visibility="gone"
+        android:textSize="18sp"
+        android:textColor="@android:color/black" />
+
+
+    <!-- ProgressBar para la carga -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" /> <!-- Inicialmente oculto -->
+
 
 </LinearLayout>

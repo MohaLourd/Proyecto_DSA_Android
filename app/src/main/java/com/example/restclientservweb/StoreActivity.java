@@ -1,6 +1,8 @@
 package com.example.restclientservweb;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +30,8 @@ public class StoreActivity extends AppCompatActivity {
     private String username;
     private String idUser;
     private int dinero;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,9 @@ public class StoreActivity extends AppCompatActivity {
 
         apiService = retrofit.create(ApiService.class);
 
+
+        sharedPreferences = getSharedPreferences("loginPreferences", Context.MODE_PRIVATE);
+
         username = getIntent().getStringExtra("username");
         idUser = getIntent().getStringExtra("idUser");
         if (username != null) {
@@ -60,6 +67,7 @@ public class StoreActivity extends AppCompatActivity {
 
         Button buttonBackToMain = findViewById(R.id.buttonBackToMain);
         buttonBackToMain.setOnClickListener(v -> {
+            deleteLoginDetails();
             Intent intent = new Intent(StoreActivity.this, MainActivity.class);
             startActivity(intent);
         });
@@ -125,5 +133,10 @@ public class StoreActivity extends AppCompatActivity {
     public void updateDineroDisplay(int nuevoDinero) {
         dinero = nuevoDinero;
         dineroDisplay.setText("Dinero: " + dinero + "€");
+    }
+    private void deleteLoginDetails() {
+        editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
     }
 }
