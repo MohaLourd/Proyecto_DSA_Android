@@ -55,9 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkLoginStatus() {
         String username = sharedPreferences.getString("username", null);
+        String idUser = sharedPreferences.getString("idUser", null);
         if (username != null) {
             Intent intent = new Intent(MainActivity.this, StoreActivity.class);
             intent.putExtra("username", username);
+            intent.putExtra("idUser", idUser);
             startActivity(intent);
             finish();
         }

@@ -80,12 +80,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
+                    u.setUser(response.body());
+
                     progressBar.setVisibility(View.GONE); // Ocultar el ProgressBar
                     textView.setVisibility(View.GONE); // Ocultar el TextView
-                    saveLoginDetails(user);
+                    saveLoginDetails(u.getUsername(), u.getId());
 
-
-                    u.setUser(response.body());
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, StoreActivity.class);
                     intent.putExtra("username", u.getUsername());
@@ -107,9 +107,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void saveLoginDetails(String username) {
+    private void saveLoginDetails(String username, String idusername) {
         editor = sharedPreferences.edit();
         editor.putString("username", username);
+        editor.putString("idUser", idusername);
         editor.apply();
     }
 }

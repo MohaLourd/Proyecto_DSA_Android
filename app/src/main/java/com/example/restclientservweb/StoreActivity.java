@@ -65,6 +65,7 @@ public class StoreActivity extends AppCompatActivity {
             dineroDisplay.setText("Dinero: " + dinero + "€");
         }
 
+
         Button buttonBackToMain = findViewById(R.id.buttonBackToMain);
         buttonBackToMain.setOnClickListener(v -> {
             deleteLoginDetails();
@@ -72,6 +73,7 @@ public class StoreActivity extends AppCompatActivity {
             startActivity(intent);
         });
         getProducts();
+        getProductsOfUser();
 
         // Inicializar el adaptador para la lista de productos comprados
         ProductAdapter purchasedAdapter = new ProductAdapter(this, new ArrayList<>(), username, true, this.dinero, idUser);
@@ -128,6 +130,28 @@ public class StoreActivity extends AppCompatActivity {
                 Log.d("CAT", "getDinero error: "+t.getMessage());
             }
         });
+    }
+    private void getProductsOfUser(){
+        Call<List<Products>> call = apiService.getProductsOfUser(idUser);
+
+        call.enqueue(new Callback<List<Products>>() {
+            @Override
+            public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
+                if (response.isSuccessful()) {
+                    List<Products> products = response.body();
+                    ProductAdapter adapter = new ProductAdapter(StoreActivity.this, products, username, true, dinero, idUser);
+                    listViewComprados.setAdapter(adapter);
+                } else {
+                    Toast.makeText(StoreActivity.this, "Failed to retrieve products", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Products>> call, Throwable t) {
+                Toast.makeText(StoreActivity.this, "An error occurred", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
     //actualiza el dinero restante
     public void updateDineroDisplay(int nuevoDinero) {

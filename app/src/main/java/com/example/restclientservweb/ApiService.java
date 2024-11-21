@@ -29,4 +29,7 @@ public interface ApiService {
 
     @POST("/dsaApp/users/{idUser}/products/{idProduct}")
     Call<Products> addProductToUser(@Path("idUser") String idUser, @Path("idProduct") int idProduct);
+
+    @GET("/dsaApp/users/{id}/products")
+    Call<List<Products>> getProductsOfUser(@Path("id") String idUser);
 }
