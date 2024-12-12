@@ -87,9 +87,13 @@ public class LoginActivity extends AppCompatActivity {
                     saveLoginDetails(u.getUsername(), u.getId());
 
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, StoreActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                     intent.putExtra("username", u.getUsername());
                     intent.putExtra("idUser", u.getId());
+                    intent.putExtra("dinero", u.getDinero());
+                    //intent.putExtra("stat_vida", u.getStats().getVida());
+                    //intent.putExtra("stat_atq", u.getStats().getAtq());
+                    //intent.putExtra("stat_vel", u.getStats().getVel());
 
                     startActivity(intent);
                 } else {

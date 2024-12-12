@@ -10,6 +10,7 @@ public class User {
     String username;
     String password;
     int dinero = 20;
+    //Stats stats;
 
     List<Products> productos;
 
@@ -78,8 +79,17 @@ public class User {
         this.password = user.getPassword();
         this.dinero = user.getDinero();
         this.productos = user.getProductos();
+        //this.stats = user.getStats();
     }
+
+//    public Stats getStats() {
+//        return stats;
+//    }
 //
+//    public void setStats(Stats stats) {
+//        this.stats = stats;
+//    }
+    //
 //    public User(String username, int dinero) {
 //        this.username = username;
 //        this.dinero = dinero;

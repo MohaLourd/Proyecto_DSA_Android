@@ -30,8 +30,7 @@ public class StoreActivity extends AppCompatActivity {
     private String username;
     private String idUser;
     private int dinero;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +49,6 @@ public class StoreActivity extends AppCompatActivity {
 
         apiService = retrofit.create(ApiService.class);
 
-
-        sharedPreferences = getSharedPreferences("loginPreferences", Context.MODE_PRIVATE);
-
         username = getIntent().getStringExtra("username");
         idUser = getIntent().getStringExtra("idUser");
         if (username != null) {
@@ -68,8 +64,10 @@ public class StoreActivity extends AppCompatActivity {
 
         Button buttonBackToMain = findViewById(R.id.buttonBackToMain);
         buttonBackToMain.setOnClickListener(v -> {
-            deleteLoginDetails();
-            Intent intent = new Intent(StoreActivity.this, MainActivity.class);
+            Intent intent = new Intent(StoreActivity.this, MenuActivity.class);
+            intent.putExtra("username", username);
+            intent.putExtra("idUser", idUser);
+            startActivity(intent);
             startActivity(intent);
         });
         getProducts();
@@ -157,10 +155,5 @@ public class StoreActivity extends AppCompatActivity {
     public void updateDineroDisplay(int nuevoDinero) {
         dinero = nuevoDinero;
         dineroDisplay.setText("Dinero: " + dinero + "€");
-    }
-    private void deleteLoginDetails() {
-        editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
     }
 }

@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button buttonLogin = findViewById(R.id.button_login);
         Button buttonRegister = findViewById(R.id.button_register);
-        Button buttonStore = findViewById(R.id.button_store);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/dsaApp/")
@@ -46,18 +45,13 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
-
-        buttonStore.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, StoreActivity.class);
-            startActivity(intent);
-        });
     }
 
     private void checkLoginStatus() {
         String username = sharedPreferences.getString("username", null);
         String idUser = sharedPreferences.getString("idUser", null);
         if (username != null) {
-            Intent intent = new Intent(MainActivity.this, StoreActivity.class);
+            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
             intent.putExtra("username", username);
             intent.putExtra("idUser", idUser);
             startActivity(intent);
