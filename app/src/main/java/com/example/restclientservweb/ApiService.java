@@ -32,7 +32,7 @@ public interface ApiService {
 
     @GET("/dsaApp/users/{id}/products")
     Call<List<Products>> getProductsOfUser(@Path("id") String idUser);
-
-    @GET("/dsaApp/users/{idUser}/puntos")
-    Call<Integer> getPuntos(@Path("idUser") String idUser);
+//
+//    @GET("/dsaApp/users/{idUser}/puntos")
+//    Call<Integer> getPuntos(@Path("idUser") String idUser);
 }

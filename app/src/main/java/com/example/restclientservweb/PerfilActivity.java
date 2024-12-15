@@ -28,8 +28,9 @@ public class PerfilActivity extends AppCompatActivity {
     private ApiService apiService;
     private String username;
     private String idUser;
-    private int dinero = -1;
-    private int puntos = -1;
+    private Integer dinero = -1;
+    private String email;
+//private int puntos = -1;
     private List<Products> productos;
     private RecyclerView recyclerView;
     private RecyclerView recyclerViewProducts;
@@ -42,6 +43,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         username = getIntent().getStringExtra("username");
         idUser = getIntent().getStringExtra("idUser");
+        //email = getIntent().getStringExtra("email");
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/dsaApp/")
@@ -50,6 +52,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         apiService = retrofit.create(ApiService.class);
         getDinero();
+        getProductsOfUser();
 
         recyclerView = findViewById(R.id.recyclerView2);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -62,15 +65,17 @@ public class PerfilActivity extends AppCompatActivity {
         Intent intent = new Intent(PerfilActivity.this, MenuActivity.class);
         intent.putExtra("username", username);
         intent.putExtra("idUser", idUser);
+       // intent.putExtra("email", email);
         startActivity(intent);
     }
 
     public void startAdapters(){
-            if (puntos != -1 && dinero != -1 && username != null) {
+           if ( dinero != -1 && username != null ) {
                 List<String> parameters = new ArrayList<>();
                 parameters.add(username);
                 parameters.add(String.valueOf(dinero));
-                parameters.add(String.valueOf(puntos));
+                //parameters.add(email);
+
 
                 PerfilAdapter adapter = new PerfilAdapter(PerfilActivity.this, parameters);
                 recyclerView.setAdapter(adapter);
@@ -87,41 +92,49 @@ public class PerfilActivity extends AppCompatActivity {
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (response.isSuccessful()) {
                     dinero = response.body();
-                    getPuntos();
+
+
+                    //getPuntos();
 
                 } else {
                     returnToMenu();
+
+                    Toast.makeText(PerfilActivity.this, "Failed to retrieve dinero", Toast.LENGTH_SHORT).show();
+
                 }
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
+                Toast.makeText(PerfilActivity.this, "An error occurred", Toast.LENGTH_SHORT).show();
+                Log.d("CAT", "getDinero error: "+t.getMessage());
                 returnToMenu();
             }
         });
     }
 
 
-    public void getPuntos(){
-        Call<Integer> call = apiService.getPuntos(idUser);
-        call.enqueue(new Callback<Integer>() {
-            @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    puntos = response.body();
-                    getProductsOfUser();
-                } else {
-                    returnToMenu();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<Integer> call, Throwable throwable) {
-                returnToMenu();
-
-            }
-        });
-    }
+//    public void getPuntos(){
+//        Call<Integer> call = apiService.getPuntos(idUser);
+//        call.enqueue(new Callback<Integer>() {
+//            @Override
+//            public void onResponse(Call<Integer> call, Response<Integer> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    puntos = response.body();
+//                    getProductsOfUser();
+//                } else {
+//                    returnToMenu();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Integer> call, Throwable throwable) {
+//                returnToMenu();
+//
+//            }
+//        });
+//    }
 
     private void getProductsOfUser(){
         Call<List<Products>> call = apiService.getProductsOfUser(idUser);
