@@ -164,4 +164,11 @@ public class PerfilActivity extends AppCompatActivity {
         Toast.makeText(PerfilActivity.this, "An error occurred", Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
+
+    public void click_btnBadges(View v){
+        Intent intent = new Intent(PerfilActivity.this, BadgesActivity.class);
+        intent.putExtra("username", username);
+        intent.putExtra("idUser", idUser);
+        startActivity(intent);
+    }
 }

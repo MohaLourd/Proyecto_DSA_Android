@@ -35,4 +35,7 @@ public interface ApiService {
 //
 //    @GET("/dsaApp/users/{idUser}/puntos")
 //    Call<Integer> getPuntos(@Path("idUser") String idUser);
+
+    @GET("/dsaApp/users/{idUser}/badges")
+    Call<List<Badge>> getBadges(@Path("idUser") String idUser);
 }
