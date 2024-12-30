@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.unity3d.player.UnityPlayerGameActivity;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button buttonLogin = findViewById(R.id.button_login);
         Button buttonRegister = findViewById(R.id.button_register);
+        Button juegoButton = findViewById(R.id.juego);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/dsaApp/")
@@ -43,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
         buttonRegister.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
+        juegoButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, UnityPlayerGameActivity.class);
             startActivity(intent);
         });
     }
