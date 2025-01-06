@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         juegoButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, UnityPlayerGameActivity.class);
+            Intent intent = new Intent(MainActivity.this, UnityPlayerGameActivity2.class);
             startActivity(intent);
         });
     }
@@ -72,21 +72,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void receiveJSONFromUnity(String json) {
+    public void receiveFromUnity(String str) {
 
-        Toast.makeText(MainActivity.this, "en principio ha cargado bien el json", Toast.LENGTH_LONG).show();
-        try
-        {
-            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-         File file = new File(path, "gameData.json");
-         FileOutputStream stream = new FileOutputStream(file);
-         stream.write(json.getBytes());
-         stream.close();
-         Toast.makeText(MainActivity.this, "JSON guardado en " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(MainActivity.this, "Error al guardar JSON", Toast.LENGTH_LONG).show();
-        }
+        Toast.makeText(MainActivity.this, "en principio ha cargado bien el str" + str, Toast.LENGTH_LONG).show();
+
+
     }
 }
