@@ -1,5 +1,8 @@
 package com.example.restclientservweb;
 
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,9 +19,13 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
 
     public void receiveFromUnity(String str) {
 
-        Toast.makeText(UnityPlayerGameActivity2.this, "en principio ha cargado bien el str" + str, Toast.LENGTH_LONG).show();
-
-
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override public void run() {
+        Intent intent = new Intent(UnityPlayerGameActivity2.this, MainActivity.class);
+        startActivity(intent);
+        }
+        }, 3000); // se espera 3 segundos antes de volver a la actividad principal
     }
 }
 
