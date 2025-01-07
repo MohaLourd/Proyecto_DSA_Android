@@ -83,6 +83,19 @@
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/btnTienda"
             app:layout_constraintTop_toBottomOf="@+id/btnTienda" />
+
+
+        <!-- Botón añadido a la derecha de la tienda -->
+        <Button
+            android:id="@+id/juego"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="28dp"
+            android:text="juego! ( ͡❛ ﹏ ͡❛)"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="#FFA500"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

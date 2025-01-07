@@ -36,6 +36,8 @@ public class MenuActivity extends AppCompatActivity {
 
 
         Button buttonBackToMain = findViewById(R.id.btnLogOut);
+        Button juegoButton = findViewById(R.id.juego);
+
         buttonBackToMain.setOnClickListener(v -> {
             deleteLoginDetails();
             Intent intent = new Intent(MenuActivity.this, MainActivity.class);
@@ -44,6 +46,11 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(intent);
             startActivity(intent);
         });
+        juegoButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuActivity.this, UnityPlayerGameActivity2.class);
+            startActivity(intent);
+        });
+
     }
 
     public void click_btnTienda(View v){
@@ -61,6 +68,7 @@ public class MenuActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
+
 
     private void deleteLoginDetails() {
         editor = sharedPreferences.edit();

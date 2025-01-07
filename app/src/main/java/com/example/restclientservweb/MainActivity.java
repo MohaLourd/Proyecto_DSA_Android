@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button buttonLogin = findViewById(R.id.button_login);
         Button buttonRegister = findViewById(R.id.button_register);
-        Button juegoButton = findViewById(R.id.juego);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/dsaApp/")
@@ -54,10 +53,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
-        juegoButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, UnityPlayerGameActivity2.class);
-            startActivity(intent);
-        });
+
     }
 
     private void checkLoginStatus() {
@@ -72,10 +68,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void receiveFromUnity(String str) {
 
-        Toast.makeText(MainActivity.this, "en principio ha cargado bien el str" + str, Toast.LENGTH_LONG).show();
-
-
-    }
 }
