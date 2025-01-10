@@ -34,6 +34,9 @@ public class MenuActivity extends AppCompatActivity {
         username = getIntent().getStringExtra("username");
         idUser = getIntent().getStringExtra("idUser");
 
+        //aqui iran las variables que le pasare al acabar el juego
+       // String dinero = getIntent().getStringExtra("dinero");
+       // String puntos = getIntent().getStringExtra("puntos");
 
         Button buttonBackToMain = findViewById(R.id.btnLogOut);
         Button juegoButton = findViewById(R.id.juego);
@@ -48,6 +51,7 @@ public class MenuActivity extends AppCompatActivity {
         });
         juegoButton.setOnClickListener(v -> {
             Intent intent = new Intent(MenuActivity.this, UnityPlayerGameActivity2.class);
+            intent.putExtra("username", username);
             startActivity(intent);
         });
 

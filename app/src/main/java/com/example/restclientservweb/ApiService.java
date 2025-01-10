@@ -38,4 +38,7 @@ public interface ApiService {
 
     @GET("/dsaApp/users/{idUser}/badges")
     Call<List<Badge>> getBadges(@Path("idUser") String idUser);
+
+    @POST("/dsaApp/users/partidaUnity")
+    Call <userPruebaUnity> registerPartida(@Body userPruebaUnity userPruebaUnity);
 }
