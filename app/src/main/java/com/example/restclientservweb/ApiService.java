@@ -32,16 +32,15 @@ public interface ApiService {
 
     @GET("/dsaApp/users/{id}/products")
     Call<List<Products>> getProductsOfUser(@Path("id") String idUser);
-//
-//    @GET("/dsaApp/users/{idUser}/puntos")
-//    Call<Integer> getPuntos(@Path("idUser") String idUser);
+
 
     @GET("/dsaApp/users/{idUser}/badges")
     Call<List<Badge>> getBadges(@Path("idUser") String idUser);
 
-//    @POST("/dsaApp/users/partidaUnity")
-//    Call <userPruebaUnity> registerPartida(@Body userPruebaUnity userPruebaUnity);
 
     @PUT("/dsaApp/users/{id}/{puntos}/{dinero}/updatePartida")
     Call <User> registerPartida(@Path("id") String idUser, @Path("puntos") String puntos, @Path("dinero") String dinero);
+
+    @GET("/dsaApp/users/ranking")
+    Call<List<User>> getRanking();
 }

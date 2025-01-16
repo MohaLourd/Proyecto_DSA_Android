@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,7 @@ public class MenuActivity extends AppCompatActivity {
 
         Button buttonBackToMain = findViewById(R.id.btnLogOut);
         Button juegoButton = findViewById(R.id.juego);
+        ImageButton buttonRanking = findViewById(R.id.btnRanking);
 
         buttonBackToMain.setOnClickListener(v -> {
             deleteLoginDetails();
@@ -55,6 +57,15 @@ public class MenuActivity extends AppCompatActivity {
             intent.putExtra("idUser", idUser);
             startActivity(intent);
         });
+
+        buttonRanking.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuActivity.this, RankingActivity.class);
+            intent.putExtra("username", username);
+            intent.putExtra("idUser", idUser);
+            startActivity(intent);
+        });
+
+
 
     }
 

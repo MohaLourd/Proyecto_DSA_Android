@@ -72,7 +72,6 @@ public class StoreActivity extends AppCompatActivity {
             intent.putExtra("username", username);
             intent.putExtra("idUser", idUser);
             startActivity(intent);
-            startActivity(intent);
         });
         getProducts(idUser);
         getProductsOfUser();
