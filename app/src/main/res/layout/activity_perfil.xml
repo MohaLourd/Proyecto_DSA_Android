@@ -9,14 +9,14 @@
 
     <ImageButton
         android:id="@+id/btnPerfil2"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="66dp"
+        android:layout_height="87dp"
         android:layout_marginTop="20dp"
         android:background="@android:drawable/screen_background_light_transparent"
         android:contentDescription="@string/Perfil"
         android:onClick="click_btnPerfil"
         android:scaleType="centerCrop"
-        android:src="@drawable/fotoperfil"
+        android:src="@drawable/avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
