@@ -37,6 +37,7 @@ public class ProductAdapter extends ArrayAdapter<Products> {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+        this.apiService = retrofit.create(ApiService.class); // Inicializar apiService
 
     }
 

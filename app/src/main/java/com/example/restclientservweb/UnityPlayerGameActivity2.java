@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.unity3d.player.UnityPlayerGameActivity;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -50,12 +52,12 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
 
  private  void SendDatatoServer(String id, int dinero, int puntos)
      {
-         userPruebaUnity userPruebaUnity = new userPruebaUnity(id, puntos, dinero);
-         Call<userPruebaUnity> call = apiService.registerPartida(id, String.valueOf(puntos), String.valueOf(dinero));
+         User userPruebaUnity = new User(id, puntos, dinero);
+         Call<User> call = apiService.registerPartida(id, String.valueOf(puntos), String.valueOf(dinero));
 
-         call.enqueue(new Callback<userPruebaUnity>() {
+         call.enqueue(new Callback<User>() {
              @Override
-             public void onResponse(Call<userPruebaUnity> call, Response<userPruebaUnity> response) {
+             public void onResponse(Call<User> call, Response<User> response) {
                  if (response.isSuccessful()) {
                      Toast.makeText(UnityPlayerGameActivity2.this, "is succesful", Toast.LENGTH_SHORT).show();
 
@@ -66,7 +68,7 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
              }
 
              @Override
-             public void onFailure(Call<userPruebaUnity> call, Throwable t) {
+             public void onFailure(Call<User> call, Throwable t) {
                  Toast.makeText(UnityPlayerGameActivity2.this, "on faiulure", Toast.LENGTH_SHORT).show();
              }
          });

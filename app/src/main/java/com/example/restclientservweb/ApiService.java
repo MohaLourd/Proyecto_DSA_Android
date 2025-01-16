@@ -43,5 +43,5 @@ public interface ApiService {
 //    Call <userPruebaUnity> registerPartida(@Body userPruebaUnity userPruebaUnity);
 
     @PUT("/dsaApp/users/{id}/{puntos}/{dinero}/updatePartida")
-    Call <userPruebaUnity> registerPartida(@Path("id") String idUser, @Path("puntos") String puntos, @Path("dinero") String dinero);
+    Call <User> registerPartida(@Path("id") String idUser, @Path("puntos") String puntos, @Path("dinero") String dinero);
 }

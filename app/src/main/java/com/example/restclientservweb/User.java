@@ -29,6 +29,13 @@ public class User {
         this.actSkinWeapon = actSkinWeapon;
     }
 
+    public User(String id, Integer puntos, Integer dinero) {
+        this();
+        this.id = id;
+        this.puntos = puntos;
+        this.dinero = dinero;
+    }
+
 
     public User(String email, String username, String password) {
         this();
