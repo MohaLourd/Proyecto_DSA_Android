@@ -9,10 +9,25 @@ public class User {
     String email;
     String username;
     String password;
-    int dinero = 20;
-    //Stats stats;
+    Integer dinero = 20;
+    Integer puntos = 0;
+    String actSkinUser = "default";
+    String actSkinWeapon = "default";
 
-    List<Products> productos;
+
+
+    public User() {
+    }
+    public User(String email, String username, String password, Integer puntos, String actSkinUser, String actSkinWeapon) {
+        this();
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        if (id != null) this.setId(id);
+        this.puntos = puntos;
+        this.actSkinUser = actSkinUser;
+        this.actSkinWeapon = actSkinWeapon;
+    }
 
 
     public User(String email, String username, String password) {
@@ -20,12 +35,11 @@ public class User {
         this.email = email;
         this.username = username;
         this.password = password;
-        this.productos = new LinkedList<>();
-    }
-    public User() {
+        if (id != null) this.setId(id);
     }
 
-    private void setId(String id) {
+
+    public void setId(String id) {
         this.id=id;
     }
 
@@ -48,37 +62,51 @@ public class User {
         this.password = password;
     }
 
-    public List<Products> getProductos(){return productos; }
-    public void addProducto(Products p){
-        productos.add(p);
-        dinero = dinero - p.getPrice();
-    }
 
-    public int getDinero(){
+    public Integer getDinero(){
         return this.dinero;
     }
     public String getEmail(){
         return email;
     }
-    public void setDinero(int dinero){
+    public void setDinero(Integer dinero){
         this.dinero = dinero;
     }
 
+    public Integer getPuntos() {
+        return puntos;
+    }
 
-    public void setProductos(List<Products> productos){this.productos = productos; }
+    public void setPuntos(Integer puntos) {
+        this.puntos = puntos;
+    }
+
+    public void setActSkinUser(String actSkinUser) {
+        this.actSkinUser = actSkinUser;
+    }
+
+    public void setActSkinWeapon(String actSkinWeapon) {
+        this.actSkinWeapon = actSkinWeapon;
+    }
+
+    public String getActSkinUser() {
+        return actSkinUser;
+    }
+
+    public String getActSkinWeapon() {
+        return actSkinWeapon;
+    }
 
     public User setEmail(String email) {
         this.email = email;
         return this;
     }
-
     public void setUser(User user){
         this.id = user.getId();
         this.email = user.getEmail();
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.dinero = user.getDinero();
-        this.productos = user.getProductos();
         //this.stats = user.getStats();
     }
 

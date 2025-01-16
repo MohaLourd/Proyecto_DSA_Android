@@ -37,7 +37,7 @@ public class ProductAdapter extends ArrayAdapter<Products> {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        apiService = retrofit.create(ApiService.class);
+
     }
 
     @Override
@@ -49,8 +49,10 @@ public class ProductAdapter extends ArrayAdapter<Products> {
 
         Products product = getItem(position);
 
+
         TextView textViewProductName = convertView.findViewById(R.id.textViewProductName);
         textViewProductName.setText(product.getName() + "         " + product.getPrice() + "€");
+
 
         if (!isPurchasedList) {
             Button buttonAction = convertView.findViewById(R.id.buttonAction);
@@ -58,6 +60,8 @@ public class ProductAdapter extends ArrayAdapter<Products> {
                 if (dinero >= product.getPrice()) {
                     dinero = dinero - product.getPrice();
                     addProductToUser(product);
+                    remove(product);//cada vez que compras un producto desaparece de la lista de la tienda
+
                 } else {
                     Toast.makeText(getContext(), "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
                 }

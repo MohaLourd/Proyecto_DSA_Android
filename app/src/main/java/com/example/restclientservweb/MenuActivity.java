@@ -52,6 +52,7 @@ public class MenuActivity extends AppCompatActivity {
         juegoButton.setOnClickListener(v -> {
             Intent intent = new Intent(MenuActivity.this, UnityPlayerGameActivity2.class);
             intent.putExtra("username", username);
+            intent.putExtra("idUser", idUser);
             startActivity(intent);
         });
 

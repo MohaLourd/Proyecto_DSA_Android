@@ -21,8 +21,8 @@ public interface ApiService {
     @POST("/dsaApp/users/login2")
     Call<User> loginUser(@Body User user);
 
-    @GET("/dsaApp/objects/Android")
-    Call<List<Products>> getProducts();
+    @GET("/dsaApp/objects/{idUser}/Android")
+    Call<List<Products>> getProducts(@Path("idUser") String idUser);
 
    @GET("/dsaApp/users/{idUser}/dinero")
     Call<Integer> getDinero(@Path("idUser") String idUser);
@@ -39,6 +39,9 @@ public interface ApiService {
     @GET("/dsaApp/users/{idUser}/badges")
     Call<List<Badge>> getBadges(@Path("idUser") String idUser);
 
-    @POST("/dsaApp/users/partidaUnity")
-    Call <userPruebaUnity> registerPartida(@Body userPruebaUnity userPruebaUnity);
+//    @POST("/dsaApp/users/partidaUnity")
+//    Call <userPruebaUnity> registerPartida(@Body userPruebaUnity userPruebaUnity);
+
+    @PUT("/dsaApp/users/{id}/{puntos}/{dinero}/updatePartida")
+    Call <userPruebaUnity> registerPartida(@Path("id") String idUser, @Path("puntos") String puntos, @Path("dinero") String dinero);
 }

@@ -35,7 +35,8 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
         int puntos = Integer.parseInt(split[1]);
 
         String username = getIntent().getStringExtra("username");
-        SendDatatoServer(username, dinero, puntos);
+        String idUser = getIntent().getStringExtra("idUser");
+        SendDatatoServer(idUser, dinero, puntos);
         Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override public void run() {
@@ -47,10 +48,10 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
         }, 3000); // se espera 3 segundos antes de volver a la actividad principal
     }
 
- private  void SendDatatoServer(String username, int dinero, int puntos)
+ private  void SendDatatoServer(String id, int dinero, int puntos)
      {
-         userPruebaUnity userPruebaUnity = new userPruebaUnity(username, puntos, dinero);
-         Call<userPruebaUnity> call = apiService.registerPartida(userPruebaUnity);
+         userPruebaUnity userPruebaUnity = new userPruebaUnity(id, puntos, dinero);
+         Call<userPruebaUnity> call = apiService.registerPartida(id, String.valueOf(puntos), String.valueOf(dinero));
 
          call.enqueue(new Callback<userPruebaUnity>() {
              @Override

@@ -1,6 +1,8 @@
 package com.example.restclientservweb;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -51,6 +53,8 @@ public class StoreActivity extends AppCompatActivity {
 
         username = getIntent().getStringExtra("username");
         idUser = getIntent().getStringExtra("idUser");
+
+
         if (username != null) {
             usernameDisplay.setText("Usuario: " + username);
             getDinero();
@@ -70,7 +74,7 @@ public class StoreActivity extends AppCompatActivity {
             startActivity(intent);
             startActivity(intent);
         });
-        getProducts();
+        getProducts(idUser);
         getProductsOfUser();
 
         // Inicializar el adaptador para la lista de productos comprados
@@ -83,8 +87,8 @@ public class StoreActivity extends AppCompatActivity {
 
     }
 
-    private void getProducts() {
-        Call<List<Products>> call = apiService.getProducts();
+    private void getProducts(String idUser) {
+        Call<List<Products>> call = apiService.getProducts(idUser);
 
         call.enqueue(new Callback<List<Products>>() {
             @Override
@@ -94,6 +98,24 @@ public class StoreActivity extends AppCompatActivity {
                    // ArrayAdapter<Products> adapter = new ArrayAdapter<>(StoreActivity.this, android.R.layout.simple_list_item_1, products);
                     ProductAdapter adapter = new ProductAdapter(StoreActivity.this, products, username, false, dinero, idUser);
                     listViewProducts.setAdapter(adapter);
+                    // Comprobar si se han comprado todos los productos
+                    int cont=0;
+                    while ( cont < adapter.getCount()) {
+                        cont++;
+                    }
+                    if (cont == 0)
+                    {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(StoreActivity.this);
+                        builder.setMessage("Has comprado todos los productos")
+                                .setCancelable(false)
+                                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                    }
                 } else {
                     Toast.makeText(StoreActivity.this, "Failed to retrieve products", Toast.LENGTH_SHORT).show();
                 }
