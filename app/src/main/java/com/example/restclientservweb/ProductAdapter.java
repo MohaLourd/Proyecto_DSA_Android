@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,12 @@ public class ProductAdapter extends ArrayAdapter<Products> {
 
         TextView textViewProductName = convertView.findViewById(R.id.textViewProductName);
         textViewProductName.setText(product.getName() + "         " + product.getPrice() + "€");
+        ImageView imageViewProduct = convertView.findViewById(R.id.imageViewStore);
+        if (product.getName().equals("coco"))
+            imageViewProduct.setImageResource(R.drawable.avatar2);
+        else
+            imageViewProduct.setImageResource(R.drawable.avatar);
+
 
 
         if (!isPurchasedList) {

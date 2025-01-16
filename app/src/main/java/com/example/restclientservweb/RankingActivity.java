@@ -69,8 +69,6 @@ public class RankingActivity extends AppCompatActivity {
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()) {
                     List<User> ranking = response.body();
-                    Logger.getLogger("RankingActivity").info("size="+ranking.size());
-                    Toast.makeText(RankingActivity.this, "size="+ranking.size(), Toast.LENGTH_SHORT).show();
                     // ArrayAdapter<Products> adapter = new ArrayAdapter<>(StoreActivity.this, android.R.layout.simple_list_item_1, products);
                     RankingAdapter adapter = new RankingAdapter(RankingActivity.this, ranking);
                     listViewRanking.setAdapter(adapter);
