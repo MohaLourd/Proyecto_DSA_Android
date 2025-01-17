@@ -56,6 +56,7 @@ public class PerfilAdapter2 extends ArrayAdapter<Products> {
         }
 
         Button buttonAction = convertView.findViewById(R.id.buttonAction);
+        buttonAction.setText("Equipar");
         buttonAction.setOnClickListener(v -> {
 
                 isEquiped = true;
@@ -76,7 +77,6 @@ public class PerfilAdapter2 extends ArrayAdapter<Products> {
 
 
 
-            //actualizarDatosPerfil(String id, String username, String email, String actSkinUser, String actSkinWeapon)
 
         });
 

@@ -32,17 +32,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/btnPerfil3"
+        android:id="@+id/btnFotoPerfil"
         android:layout_width="66dp"
         android:layout_height="87dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="8dp"
         android:background="@android:drawable/screen_background_light_transparent"
         android:contentDescription="@string/Perfil"
-        android:onClick="click_btnPerfil"
         android:scaleType="centerCrop"
-        android:src="@drawable/avatar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

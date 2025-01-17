@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ public class PerfilActivity2 extends AppCompatActivity {
     TextView textViewAvatar;
     TextView textViewMejora;
     ListView listViewInventario;
+    ImageButton btnFotoPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class PerfilActivity2 extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         textViewUsername = findViewById(R.id.textViewUsername);
         textViewEmail = findViewById(R.id.textViewEmail);
         textViewDinero = findViewById(R.id.textViewCoins);
@@ -120,7 +123,7 @@ public class PerfilActivity2 extends AppCompatActivity {
                 parent.removeView(editTextUsername);
                 parent.addView(textViewUsername, index);
                 btnActualizarUsername.setEnabled(false);
-                actualizarDatosPerfil(idUser, textViewUsername.getText().toString(), textViewEmail.getText().toString(),textViewAvatar.toString(),textViewMejora.toString());
+                actualizarDatosPerfil(idUser, textViewUsername.getText().toString(), textViewEmail.getText().toString(),textViewAvatar.getText().toString(),textViewMejora.getText().toString());
             });
 
         });
@@ -165,6 +168,12 @@ public class PerfilActivity2 extends AppCompatActivity {
                     textViewPuntos.setText(String.valueOf(userPerfil.getPuntos()));
                     textViewAvatar.setText(userPerfil.getActSkinUser());
                     textViewMejora.setText(userPerfil.getActSkinWeapon());
+
+                    btnFotoPerfil = findViewById(R.id.btnFotoPerfil);
+                    if (textViewAvatar.getText().equals("avatar2"))
+                        btnFotoPerfil.setBackgroundResource(R.drawable.avatar2);
+                    else
+                        btnFotoPerfil.setBackgroundResource(R.drawable.avatar);
 
                 }
             }
