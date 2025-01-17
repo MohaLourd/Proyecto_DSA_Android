@@ -1,8 +1,10 @@
 package com.example.restclientservweb;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -46,7 +48,7 @@ public class PerfilActivity2 extends AppCompatActivity {
     TextView textViewMejora;
     ListView listViewInventario;
     ImageButton btnFotoPerfil;
-
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +69,17 @@ public class PerfilActivity2 extends AppCompatActivity {
 
         username = getIntent().getStringExtra("username");
         idUser = getIntent().getStringExtra("idUser");
+
+        if (idUser == null || username == null) {
+            sharedPreferences = getSharedPreferences("loginPreferences", Context.MODE_PRIVATE);
+            username = sharedPreferences.getString("username", null);
+            idUser = sharedPreferences.getString("idUser", null);
+        }
+
+
+
+
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/dsaApp/")

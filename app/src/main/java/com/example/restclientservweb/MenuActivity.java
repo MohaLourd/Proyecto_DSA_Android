@@ -29,11 +29,15 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu);
-
         sharedPreferences = getSharedPreferences("loginPreferences", Context.MODE_PRIVATE);
 
         username = getIntent().getStringExtra("username");
         idUser = getIntent().getStringExtra("idUser");
+
+        if (idUser == null || username == null) {
+            username = sharedPreferences.getString("username", null);
+            idUser = sharedPreferences.getString("idUser", null);
+        }
 
         //aqui iran las variables que le pasare al acabar el juego
        // String dinero = getIntent().getStringExtra("dinero");
