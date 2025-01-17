@@ -57,6 +57,8 @@ public class RankingActivity extends AppCompatActivity {
         Button buttonBackToMenu = findViewById(R.id.btnBackMenu);
         buttonBackToMenu.setOnClickListener(v -> {
             Intent intent = new Intent(RankingActivity.this, MenuActivity.class);
+            intent.putExtra("username", getIntent().getStringExtra("username"));
+            intent.putExtra("idUser", getIntent().getStringExtra("idUser"));
             startActivity(intent);
         });
     }

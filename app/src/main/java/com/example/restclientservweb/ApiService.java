@@ -34,13 +34,15 @@ public interface ApiService {
     Call<List<Products>> getProductsOfUser(@Path("id") String idUser);
 
 
-    @GET("/dsaApp/users/{idUser}/badges")
-    Call<List<Badge>> getBadges(@Path("idUser") String idUser);
-
-
     @PUT("/dsaApp/users/{id}/{puntos}/{dinero}/updatePartida")
     Call <User> registerPartida(@Path("id") String idUser, @Path("puntos") String puntos, @Path("dinero") String dinero);
 
     @GET("/dsaApp/users/ranking")
     Call<List<User>> getRanking();
+
+    @GET("/dsaApp/users/{idUser}/datosPerfil")
+    Call<User> getDatosPerfil(@Path("idUser") String idUser);
+
+    @PUT("/dsaApp/users/update2")
+    Call<User> updateUser(@Body User user);
 }

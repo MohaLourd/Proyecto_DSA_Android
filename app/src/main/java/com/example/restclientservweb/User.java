@@ -29,12 +29,40 @@ public class User {
         this.actSkinWeapon = actSkinWeapon;
     }
 
+
+    public User( String id, String email, String username, String password, Integer puntos,Integer dinero, String actSkinUser, String actSkinWeapon) {
+        this();
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        if (id != null) this.setId(id);
+        this.puntos = puntos;
+        this.dinero = dinero;
+        this.actSkinUser = actSkinUser;
+        this.actSkinWeapon = actSkinWeapon;
+    }
+
+    public User( String id, String email, String username, String actSkinUser, String actSkinWeapon) {
+        this();
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        if (id != null) this.setId(id);
+        this.actSkinUser = actSkinUser;
+        this.actSkinWeapon = actSkinWeapon;
+    }
+
+
+
     public User(String id, Integer puntos, Integer dinero) {
         this();
         this.id = id;
         this.puntos = puntos;
         this.dinero = dinero;
     }
+
+
 
 
     public User(String email, String username, String password) {

@@ -78,7 +78,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void click_btnPerfil(View v){
-        Intent intent = new Intent(MenuActivity.this, PerfilActivity.class);
+        Intent intent = new Intent(MenuActivity.this, PerfilActivity2.class);
         intent.putExtra("username", username);
         intent.putExtra("idUser", idUser);
 
