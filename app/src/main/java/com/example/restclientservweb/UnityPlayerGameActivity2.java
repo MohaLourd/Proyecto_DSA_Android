@@ -27,7 +27,7 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
 
         String idUser = getIntent().getStringExtra("idUser");
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/dsaApp/") // Cambiado a 10.0.2.2 para el emulador
+                .baseUrl("http://10.0.2.2:8080/dsaApp/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -59,6 +59,35 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
             }
         });
 
+    }
+
+    public void RequestUserAvatar()
+    {
+        String idUser = getIntent().getStringExtra("idUser");
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8080/dsaApp/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        apiService = retrofit.create(ApiService.class);
+        Call<User> call = apiService.getDatosPerfil(idUser);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    User user = response.body();
+                    Log.d("UnityCommunication", "Usuario recibido: " + user);
+                    UnityPlayer.UnitySendMessage("InfoUser", "ReceiveUserAvatar", user.getActSkinUser());
+                } else {
+                    Log.e("UnityCommunication", "Error en la respuesta: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e("UnityCommunication", "Error en la solicitud: " + t.getMessage());
+            }
+        });
     }
 
     public void receiveFromUnity(String str) {
