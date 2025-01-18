@@ -23,12 +23,7 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
 
     private ApiService apiService;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        GetUserData();
-    }
-    public void GetUserData() {
+    public void RequestUserData() {
 
         String idUser = getIntent().getStringExtra("idUser");
         Retrofit retrofit = new Retrofit.Builder()
@@ -37,50 +32,35 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
                 .build();
 
         apiService = retrofit.create(ApiService.class);
-        String productsString = "";
-
-        // getProductsOfUser(idUser, productsString);
-        System.out.println(productsString);
-
-        productsString = "Arma2";
-
-        UnityPlayer.UnitySendMessage("InfoUser", "RequestUserData", productsString);
-
-
-
-    }
-
-    private void getProductsOfUser(String idUser, String productsString) {
         Call<List<Products>> call = apiService.getProductsOfUser(idUser);
-
         call.enqueue(new Callback<List<Products>>() {
             @Override
             public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
                 if (response.isSuccessful()) {
-                    List<Products> products = response.body();
-                    String productsString = "";
-                    for (Products product : products) {
-                        productsString += product.getName() + ",";
+                    List<Products> listaProductos = response.body();
+                    Log.d("UnityCommunication", "Productos recibidos: " + listaProductos);
+                    String productos = "";
+                    for (Products product : listaProductos) {
+                        productos = productos + product.getName() + ",";
+                    }
+                    if (productos.length() > 0) {
+                        productos = productos.substring(0, productos.length() - 1);
                     }
 
-
+                    UnityPlayer.UnitySendMessage("InfoUser", "ReceiveUserData", productos);
                 } else {
-                    Log.e("RequestUserData", "Error in response");
-                    String productsString = "Error";
-                    Toast.makeText(UnityPlayerGameActivity2.this, "else +" + response.body(), Toast.LENGTH_SHORT).show();
-
+                    Log.e("UnityCommunication", "Error en la respuesta: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Products>> call, Throwable t) {
-                Log.e("RequestUserData", "Error in request");
-                String productsString = "Error";
-
+                Log.e("UnityCommunication", "Error en la solicitud: " + t.getMessage());
             }
         });
 
     }
+
     public void receiveFromUnity(String str) {
 
         Retrofit retrofit = new Retrofit.Builder()
