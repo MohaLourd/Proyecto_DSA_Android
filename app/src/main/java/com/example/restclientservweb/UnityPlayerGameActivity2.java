@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.unity3d.player.UnityPlayer;
 import com.unity3d.player.UnityPlayerGameActivity;
 
 import java.util.List;
@@ -22,6 +23,64 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
 
     private ApiService apiService;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        GetUserData();
+    }
+    public void GetUserData() {
+
+        String idUser = getIntent().getStringExtra("idUser");
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8080/dsaApp/") // Cambiado a 10.0.2.2 para el emulador
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        apiService = retrofit.create(ApiService.class);
+        String productsString = "";
+
+        // getProductsOfUser(idUser, productsString);
+        System.out.println(productsString);
+
+        productsString = "Arma2";
+
+        UnityPlayer.UnitySendMessage("InfoUser", "RequestUserData", productsString);
+
+
+
+    }
+
+    private void getProductsOfUser(String idUser, String productsString) {
+        Call<List<Products>> call = apiService.getProductsOfUser(idUser);
+
+        call.enqueue(new Callback<List<Products>>() {
+            @Override
+            public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
+                if (response.isSuccessful()) {
+                    List<Products> products = response.body();
+                    String productsString = "";
+                    for (Products product : products) {
+                        productsString += product.getName() + ",";
+                    }
+
+
+                } else {
+                    Log.e("RequestUserData", "Error in response");
+                    String productsString = "Error";
+                    Toast.makeText(UnityPlayerGameActivity2.this, "else +" + response.body(), Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Products>> call, Throwable t) {
+                Log.e("RequestUserData", "Error in request");
+                String productsString = "Error";
+
+            }
+        });
+
+    }
     public void receiveFromUnity(String str) {
 
         Retrofit retrofit = new Retrofit.Builder()
