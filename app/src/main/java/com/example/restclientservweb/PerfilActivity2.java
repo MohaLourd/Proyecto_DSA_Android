@@ -1,13 +1,9 @@
 package com.example.restclientservweb;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,11 +19,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -169,7 +162,7 @@ public class PerfilActivity2 extends AppCompatActivity {
 
     }
     public void getDatosPerfil(String id) {
-        Call<User> call = apiService.getDatosPerfil(id);
+        Call<User> call = apiService.getUserProfileById(id);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -185,8 +178,12 @@ public class PerfilActivity2 extends AppCompatActivity {
                     btnFotoPerfil = findViewById(R.id.btnFotoPerfil);
                     if (textViewAvatar.getText().equals("avatar2"))
                         btnFotoPerfil.setBackgroundResource(R.drawable.avatar2);
-                    else
-                        btnFotoPerfil.setBackgroundResource(R.drawable.avatar);
+                    else if (textViewAvatar.getText().equals("avatar1"))
+                        btnFotoPerfil.setBackgroundResource(R.drawable.avatar1);
+                    else if (textViewAvatar.getText().equals("avatar3"))
+                        btnFotoPerfil.setBackgroundResource(R.drawable.avatar3);
+                    else if (textViewAvatar.getText().equals("avatar4"))
+                        btnFotoPerfil.setBackgroundResource(R.drawable.avatar4);
 
                 }
             }

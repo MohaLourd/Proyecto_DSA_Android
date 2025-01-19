@@ -70,7 +70,7 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
                 .build();
 
         apiService = retrofit.create(ApiService.class);
-        Call<User> call = apiService.getDatosPerfil(idUser);
+        Call<User> call = apiService.getUserProfileById(idUser);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -127,17 +127,17 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
              @Override
              public void onResponse(Call<User> call, Response<User> response) {
                  if (response.isSuccessful()) {
-                     Toast.makeText(UnityPlayerGameActivity2.this, "is succesful", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(UnityPlayerGameActivity2.this, "is succesful", Toast.LENGTH_SHORT).show();
 
                  } else {
 
-                     Toast.makeText(UnityPlayerGameActivity2.this, "else +" + response.body(), Toast.LENGTH_SHORT).show();
+               //      Toast.makeText(UnityPlayerGameActivity2.this, "else +" + response.body(), Toast.LENGTH_SHORT).show();
                  }
              }
 
              @Override
              public void onFailure(Call<User> call, Throwable t) {
-                 Toast.makeText(UnityPlayerGameActivity2.this, "on faiulure", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(UnityPlayerGameActivity2.this, "on faiulure", Toast.LENGTH_SHORT).show();
              }
          });
      }

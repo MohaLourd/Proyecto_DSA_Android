@@ -1,7 +1,6 @@
 package com.example.restclientservweb;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,8 +59,15 @@ public class ProductAdapter extends ArrayAdapter<Products> {
 
             if (product.getName().equals("avatar2"))
                 imageViewProduct.setImageResource(R.drawable.avatar2);
+            else if (product.getName().equals("avatar1"))
+                imageViewProduct.setImageResource(R.drawable.avatar1);
+            else if (product.getName().equals("avatar3"))
+                imageViewProduct.setImageResource(R.drawable.avatar3);
+            else if (product.getName().equals("avatar4"))
+                imageViewProduct.setImageResource(R.drawable.avatar4);
+
             else
-                imageViewProduct.setImageResource(R.drawable.avatar);
+                imageViewProduct.setImageResource(R.drawable.mejora);
         }
 
 

@@ -24,7 +24,7 @@
             android:contentDescription="@string/Perfil"
             android:onClick="click_btnPerfil"
             android:scaleType="centerCrop"
-            android:src="@drawable/avatar"
+            android:src="@drawable/avatar1"
             app:layout_constraintBottom_toTopOf="@id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

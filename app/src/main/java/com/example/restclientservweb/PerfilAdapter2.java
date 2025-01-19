@@ -51,8 +51,12 @@ public class PerfilAdapter2 extends ArrayAdapter<Products> {
         if (imageViewProduct != null) {
             if (product.getName().equals("avatar2"))
                 imageViewProduct.setImageResource(R.drawable.avatar2);
-            else
-                imageViewProduct.setImageResource(R.drawable.avatar);
+            else if (product.getName().equals("avatar1"))
+                imageViewProduct.setImageResource(R.drawable.avatar1);
+            else if (product.getName().equals("avatar3"))
+                imageViewProduct.setImageResource(R.drawable.avatar3);
+            else if (product.getName().equals("avatar4"))
+                imageViewProduct.setImageResource(R.drawable.avatar4);
         }
 
         Button buttonAction = convertView.findViewById(R.id.buttonAction);

@@ -41,7 +41,7 @@ public interface ApiService {
     Call<List<User>> getRanking();
 
     @GET("/dsaApp/users/{idUser}/datosPerfil")
-    Call<User> getDatosPerfil(@Path("idUser") String idUser);
+    Call<User> getUserProfileById(@Path("idUser") String idUser);
 
     @PUT("/dsaApp/users/update2")
     Call<User> updateUser(@Body User user);
