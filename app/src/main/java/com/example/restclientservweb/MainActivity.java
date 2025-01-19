@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonRegister = findViewById(R.id.button_register);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/dsaApp/")
+                .baseUrl("http://147.83.7.203:80/dsaApp/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
