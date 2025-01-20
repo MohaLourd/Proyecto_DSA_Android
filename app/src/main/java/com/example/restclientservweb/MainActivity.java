@@ -3,6 +3,7 @@ package com.example.restclientservweb;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.Button;
@@ -34,9 +35,10 @@ public class MainActivity extends AppCompatActivity {
 
         Button buttonLogin = findViewById(R.id.button_login);
         Button buttonRegister = findViewById(R.id.button_register);
+        Button buttonWeb = findViewById(R.id.button_web);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://147.83.7.203:80/dsaApp/")
+                .baseUrl("http://10.0.2.2:8080/dsaApp/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -52,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(intent);
+        });
+        buttonWeb.setOnClickListener(v -> {
+            String url = "http://10.0.2.2:8080/webapp/";
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(browserIntent);
         });
 
     }

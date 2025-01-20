@@ -30,7 +30,7 @@ public class PerfilAdapter2 extends ArrayAdapter<Products> {
 
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://147.83.7.203:80/dsaApp/")
+                .baseUrl("http://10.0.2.2:8080/dsaApp/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -57,6 +57,8 @@ public class PerfilAdapter2 extends ArrayAdapter<Products> {
                 imageViewProduct.setImageResource(R.drawable.avatar3);
             else if (product.getName().equals("avatar4"))
                 imageViewProduct.setImageResource(R.drawable.avatar4);
+            else
+                imageViewProduct.setImageResource(R.drawable.mejora);
         }
 
         Button buttonAction = convertView.findViewById(R.id.buttonAction);
