@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonWeb = findViewById(R.id.button_web);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/dsaApp/")
+                .baseUrl("http://147.83.7.203:80/dsaApp/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         buttonWeb.setOnClickListener(v -> {
-            String url = "http://10.0.2.2:8080/webapp/";
+            String url = "http://147.83.7.203:80/webapp/";
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(browserIntent);
         });

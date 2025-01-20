@@ -38,7 +38,7 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
 
         String idUser = getIntent().getStringExtra("idUser");
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/dsaApp/")
+                .baseUrl("http://147.83.7.203:80/dsaApp/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -76,7 +76,7 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
     {
         String idUser = getIntent().getStringExtra("idUser");
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/dsaApp/") //http://147.83.7.203/dsaApp/
+                .baseUrl("http://147.83.7.203:80/dsaApp/") //http://147.83.7.203/dsaApp/
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -104,7 +104,7 @@ public class UnityPlayerGameActivity2 extends com.unity3d.player.UnityPlayerGame
     public void receiveFromUnity(String str) {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/dsaApp/") // Cambiado a 10.0.2.2 para el emulador    http://10.0.2.2:8080/dsaApp/   http://147.83.7.203:80/dsaApp/
+                .baseUrl("http://147.83.7.203:80/dsaApp/") // Cambiado a 10.0.2.2 para el emulador    http://10.0.2.2:8080/dsaApp/   http://147.83.7.203:80/dsaApp/
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

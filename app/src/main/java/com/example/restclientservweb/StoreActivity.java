@@ -45,7 +45,7 @@ public class StoreActivity extends AppCompatActivity {
         dineroDisplay = findViewById(R.id.dineroDisplay);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/dsaApp/") // Cambiado a 10.0.2.2 para el emulador
+                .baseUrl("http://147.83.7.203:80/dsaApp/") // Cambiado a 10.0.2.2 para el emulador
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
